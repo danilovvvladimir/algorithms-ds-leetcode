@@ -28,25 +28,30 @@ const canSum = (targetSum, numbers) => {
 };
 
 console.log(canSum(10, [5, 3, 4, 7]));
+console.log(canSum(7, [1, 2]));
 
 // === Dynamic Programming =>
 // === Memoization ===
 // O(m*n) - time
 // O(m) - space
+
 const canSumMemoization = (targetSum, numbers, memo = {}) => {
-  if (targetSum in memo) return false;
+  if (targetSum in memo) return memo[targetSum];
   if (targetSum === 0) return true;
   if (targetSum < 0) return false;
 
   for (let num of numbers) {
-    if (canSumMemoization(targetSum - num, numbers, memo)) {
+    const remainder = targetSum - num;
+
+    if (canSumMemoization(remainder, numbers, memo) === true) {
+      memo[targetSum] = true;
       return true;
-    } else {
-      memo[targetSum - num] = false;
     }
   }
 
+  memo[targetSum] = false;
   return false;
 };
 
-console.log(canSumMemoization(30000, [1, 14]));
+console.log(canSumMemoization(300, [1, 14]));
+console.log(canSumMemoization(7, [1, 2]));
