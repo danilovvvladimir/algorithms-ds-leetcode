@@ -55,3 +55,20 @@ const canSumMemoization = (targetSum, numbers, memo = {}) => {
 
 console.log(canSumMemoization(300, [1, 14]));
 console.log(canSumMemoization(7, [1, 2]));
+
+const canSumTabulation = (targetSum, numbers) => {
+  const table = Array(targetSum + 1).fill(false);
+  table[0] = true;
+  for (let i = 0; i < targetSum; i++) {
+    if (table[i]) {
+      for (let num of numbers) {
+        table[i + num] = true;
+      }
+    }
+  }
+
+  return table[targetSum];
+};
+
+console.log(canSumTabulation(7, [1, 2]));
+console.log(canSumTabulation(300, [1, 14]));

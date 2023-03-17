@@ -44,4 +44,4 @@ const allSumCombinations = (targetSum, numbers) => {
 };
 
 debugger;
-console.log(allSumCombinationsHandler(50));
+console.log(allSumCombinationsHandler(15));

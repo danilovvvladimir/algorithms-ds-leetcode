@@ -46,3 +46,25 @@ const gridTravelerMemoization = (m, n, memo = {}) => {
 };
 
 console.log(gridTravelerMemoization(18, 18)); //2333606220
+
+const gridTravelerTabulation = (m, n) => {
+  const table = Array(m + 1)
+    .fill()
+    .map(() => Array(n + 1).fill(0));
+
+  table[1][1] = 1;
+
+  for (let i = 0; i < m + 1; i++) {
+    for (let j = 0; j < n + 1; j++) {
+      const current = table[i][j];
+      // adding current to left cell and bottom cell
+      if (j + 1 < n + 1) table[i][j + 1] += current;
+      if (i + 1 < m + 1) table[i + 1][j] += current;
+    }
+  }
+
+  return table[m][n];
+};
+
+console.log(gridTravelerTabulation(3, 3)); // 6
+console.log(gridTravelerTabulation(18, 18)); //2333606220

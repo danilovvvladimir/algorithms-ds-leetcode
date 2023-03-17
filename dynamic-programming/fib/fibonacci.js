@@ -38,3 +38,18 @@ const fibMemoizationArray = (n, memo = []) => {
   return memo[n];
 };
 console.log(fibMemoizationArray(50));
+
+// === Tabulation ===
+const fibTabulation = (n) => {
+  const table = Array(n + 1).fill(0);
+  table[1] = 1;
+
+  for (let i = 0; i < n + 1; i++) {
+    table[i + 1] = table[i + 1] + table[i];
+    table[i + 2] = table[i + 2] + table[i];
+  }
+
+  return table[n];
+};
+
+console.log(fibTabulation(50));

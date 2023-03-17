@@ -53,3 +53,18 @@ const howSumMemoization = (targetSum, numbers, memo = {}) => {
   return null;
 };
 console.log(howSumMemoization(300, [7, 14]));
+
+const howSumTabulation = (targetSum, numbers) => {
+  const table = Array(targetSum + 1).fill(null);
+  table[0] = [];
+
+  for (let i = 0; i < targetSum; i++) {
+    if (table[i] !== null) {
+      for (let num of numbers) {
+        table[i + num] = [...table[i], num];
+      }
+    }
+  }
+  return table[targetSum];
+};
+console.log(howSumTabulation(8, [2, 3, 5]));

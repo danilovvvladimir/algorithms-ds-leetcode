@@ -38,9 +38,9 @@ const bestSum = (targetSum, numbers) => {
   return shortestCombination;
 };
 
-console.log(bestSum(7, [5, 3, 4, 7]));
-console.log(bestSum(8, [5, 3, 2]));
-console.log(bestSum(8, [1, 4, 5]));
+// console.log(bestSum(7, [5, 3, 4, 7]));
+// console.log(bestSum(8, [5, 3, 2]));
+// console.log(bestSum(8, [1, 4, 5]));
 //console.log(bestSum(100, [1, 4, 5, 25]));
 
 // === Memoization ===
@@ -72,4 +72,45 @@ const bestSumMemoization = (targetSum, numbers, memo = {}) => {
   return memo[targetSum];
 };
 
-console.log(bestSumMemoization(100, [1, 4, 5, 25]));
+// console.log(bestSumMemoization(100, [1, 4, 5, 25]));
+
+// longest sum
+const bestSumTabulation = (targetSum, numbers) => {
+  const table = Array(targetSum + 1).fill(null);
+  table[0] = [];
+
+  for (let i = 0; i < targetSum; i++) {
+    if (table[i] !== null) {
+      let newNumbers = [...numbers].filter((item) => item > i);
+
+      for (let num of newNumbers) {
+        if (num === i && i != 0) continue;
+        const combination = [...table[i], num];
+        // console.log(num);
+        // console.log(combination);
+        // console.log(newNumbers);
+
+        if (
+          table[i + num] == null ||
+          table[i + num].length < combination.length
+        ) {
+          table[i + num] = combination;
+        }
+        newNumbers = newNumbers.filter((item) => item !== num);
+      }
+    }
+  }
+
+  console.log(table[targetSum]);
+  // return table.filter(
+  //   (item) => item.reduce((acc, curr) => acc * curr) >= mainLength
+  // );
+  // return table.filter((item) => item.length == mainLength);
+};
+debugger;
+
+const newArr = [];
+for (let i = 1; i < 10; i++) {
+  newArr.push(i);
+}
+console.log(bestSumTabulation(10, newArr));
