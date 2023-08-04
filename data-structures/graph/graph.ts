@@ -69,6 +69,22 @@ namespace NSGraph {
         }
       }
     }
+
+    hasPath(sourceNodeValue: string, destinationNodeValue: string): boolean {
+      if (sourceNodeValue === destinationNodeValue) return true;
+
+      const neighbors = this.getNeighbors(sourceNodeValue);
+
+      if (neighbors) {
+        for (let i = 0; i < neighbors.length; i++) {
+          if (this.hasPath(neighbors[i], destinationNodeValue)) {
+            return true;
+          }
+        }
+      }
+
+      return false;
+    }
   }
 
   const myGraph = new Graph();
@@ -87,5 +103,6 @@ namespace NSGraph {
 
   console.log(myGraph.getAll());
   // myGraph.printDFS("A");
-  myGraph.printBFS("A");
+  // myGraph.printBFS("A");
+  console.log(myGraph.hasPath("B", "D"));
 }
