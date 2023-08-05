@@ -10,7 +10,7 @@ namespace NS238 {
 
     let postfix = 1;
     for (let i = nums.length - 1; i >= 0; i--) {
-      result[i] = postfix;
+      result[i] *= postfix;
       postfix *= nums[i];
     }
 
